@@ -1,42 +1,60 @@
+
 package com.sky.pro.HW10_libraries.service;
+
 import com.sky.pro.HW10_libraries.employee.Employee;
+
 import com.sky.pro.HW10_libraries.exception.IsAllLowerException;
+
 import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.stereotype.Service;
+
 import com.sky.pro.HW10_libraries.exception.FullMapException;
+
 import com.sky.pro.HW10_libraries.exception.IsAlfaException;
+
 import com.sky.pro.HW10_libraries.exception.IsAllLowerCaseException ;
+
 import java.text.DecimalFormat;
+
 import java.util.*;
+
 import java.util.stream.Collectors;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
-    public Map<String, Employee> employees = new HashMap<>(Map.of(
+
+public class EmployeeServiceImpl implements EmployeeService {    public Map<String, Employee> employees = new HashMap<>(Map.of(
             "1",
+
             new Employee("Иван Иванов",
                     1000000,
                     1
             ),
             "2",
+
             new Employee("Петр Петров",
                     10000060,
                     2
             ),
             "3",
+
             new Employee("Василий Васильев",
                     1785876869,
                     3
             ),
             "4",
+
             new Employee("Виктор Викторов",
                     7678125,
                     3
             ),
             "5",
+
             new Employee(" Ира Годунова",
                     8765589,
                     4
             )
+
     ));
     String[] departments = {
             "IT",
@@ -45,21 +63,13 @@ public class EmployeeServiceImpl implements EmployeeService {
             "отдел закупок",
             "финансовый",
     };
-
     Map<String, Integer> departmentsCodes = Map.of(
-
             "IT", 1,
-
             "руководящий", 1,
-
             "юридический", 2,
-
             "отдел закупок", 3,
-
             "финансовый", 4
-
     );
-
     @Override
     public StringBuilder printAllEmployees() {
         StringBuilder rezString = new StringBuilder("");
@@ -72,10 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         ", отдел: " + employee.getDepartment()  + "\n"));
         return rezString;
     }
-
-
     @Override
-
     public void addEmployee(String fullName, int salary, int department ) throws FullMapException, IsAlfaException,   IsAllLowerCaseException {
         if (Employee.getIdCounter() > 20) {
             throw new FullMapException();
@@ -211,14 +218,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .max(Comparator.comparingInt(e -> e.getSalary()))
                 .map(employee -> employee.getFullName()).orElse("");
     }
-    @Override
-    public String findAndPrintEmployeeById(int id) {
-        return employees.values().stream()
-                .filter(e -> id == e.getId())
-                .map(employee -> employee.getFullName())
-                .findFirst()
-                .orElse(null);
-    }
+
     @Override
     public int monthSumSalary() {
         int sum = 0;

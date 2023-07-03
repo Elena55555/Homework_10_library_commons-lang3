@@ -71,7 +71,7 @@ public interface EmployeeService {
     String findEmployeesMaximalSalary();
 
 
-    String findAndPrintEmployeeById(int id);
+
 
 
     int monthSumSalary();
